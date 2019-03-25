@@ -11,7 +11,7 @@ public class MyBatisItemDao implements ItemDao {
 	public void setSqlSession(SqlSessionTemplate sqlSession){
 		this.sqlSession = sqlSession;
 	}
-	
+	 
 	@Override 
 	public Item findById(Integer itemId){
 		String statement = "com.lsj.spring.dao.mybatis.Item.findById";

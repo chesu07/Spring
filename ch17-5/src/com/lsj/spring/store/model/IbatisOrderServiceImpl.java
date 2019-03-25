@@ -6,7 +6,7 @@ import com.lsj.spring.store.dao.ItemDao;
 import com.lsj.spring.store.dao.PaymentInfoDao;
 import com.lsj.spring.store.dao.PurchaseOrderDao;
 
-public class IbatisOrderServiceImpl implements PlaceOrderService {
+public class IbatisOrderServiceImpl implements PlaceOrderService { 
 	private ItemDao itemDao;
 	private PaymentInfoDao paymentInfoDao;
 	private PurchaseOrderDao purchaseOrderDao;

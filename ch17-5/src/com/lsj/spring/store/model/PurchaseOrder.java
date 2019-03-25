@@ -4,7 +4,7 @@ public class PurchaseOrder {
 	private Integer id;
 	private Integer itemId;
 	private String address;
-	private Integer paymentInfoId;
+	private Integer paymentInfoId; 
 	
 	public PurchaseOrder() { }
 	public PurchaseOrder(Integer itemId, String address, Integer paymentInfoId){

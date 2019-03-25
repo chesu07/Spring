@@ -8,7 +8,7 @@ import com.lsj.spring.store.model.PurchaseOrder;
 public class MyBatisPurchaseOrderDao implements PurchaseOrderDao {
 private SqlSessionTemplate sqlSession;
 	
-	public void setSqlSession(SqlSessionTemplate sqlSession){
+	public void setSqlSession(SqlSessionTemplate sqlSession){ 
 		this.sqlSession = sqlSession;
 	}
 	

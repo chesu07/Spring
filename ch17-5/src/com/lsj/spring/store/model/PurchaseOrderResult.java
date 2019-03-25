@@ -5,7 +5,7 @@ public class PurchaseOrderResult {
 	private PaymentInfo paymentInfo;
 	private PurchaseOrder order;
 	
-	public PurchaseOrderResult(Item item, PaymentInfo paymentInfo, PurchaseOrder order){
+	public PurchaseOrderResult(Item item, PaymentInfo paymentInfo, PurchaseOrder order){ 
 		this.item = item;
 		this.paymentInfo = paymentInfo;
 		this.order = order;

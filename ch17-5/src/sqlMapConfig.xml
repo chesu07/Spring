@@ -6,4 +6,4 @@
 	<sqlMap resource="com/lsj/spring/store/dao/ibatis/Item.xml"/>
 	<sqlMap resource="com/lsj/spring/store/dao/ibatis/PaymentInfo.xml"/>
 	<sqlMap resource="com/lsj/spring/store/dao/ibatis/PurchaseOrder.xml"/>	
-</sqlMapConfig>
+</sqlMapConfig> 

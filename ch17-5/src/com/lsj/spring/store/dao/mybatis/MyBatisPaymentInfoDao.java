@@ -13,7 +13,7 @@ public class MyBatisPaymentInfoDao implements PaymentInfoDao{
 	}
 	
 	public int nextVal(){
-		String statement = "com.lsj.spring.dao.mybatis.PaymentInfo.nextVal";
+		String statement = "com.lsj.spring.dao.mybatis.PaymentInfo.nextVal"; 
 		return (Integer) sqlSession.selectOne(statement);				
 	}
 	

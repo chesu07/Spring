@@ -16,8 +16,8 @@ public class PlaceOrderServiceMyBatisMain {
 			ApplicationContext context = new ClassPathXmlApplicationContext(configLocations);
 			placeOrderService = (PlaceOrderService) context.getBean("placeOrderService");
 			
-		}catch(Exception e){
-			e.printStackTrace();
+		}catch(Exception e){ 
+			e.printStackTrace(); 
 		}
 		
 	}

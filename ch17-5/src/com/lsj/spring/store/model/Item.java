@@ -1,7 +1,7 @@
 package com.lsj.spring.store.model;
 
 public class Item {
-	private Integer id;
+	private Integer id; 
 	private String name;
 	private int price;
 	

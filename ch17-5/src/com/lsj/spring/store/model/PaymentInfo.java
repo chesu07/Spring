@@ -1,6 +1,6 @@
 package com.lsj.spring.store.model;
 
-public class PaymentInfo {
+public class PaymentInfo { 
 	private Integer id;
 	private int price;
 	public PaymentInfo(){ }
