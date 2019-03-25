@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+			
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close"
+		p:driverClassName="oracle.jdbc.driver.OracleDriver"
+		p:url="jdbc:oracle:thin:@localhost:1521:DHDB"
+		p:username="scott"  
+		p:password="snrnrh21" />		
+				
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		p:dataSource-ref="dataSource"/>
+		
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
+	</bean>
+	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+	</bean>	 
+	
+	<bean id="itemDao" class="com.lsj.spring.store.dao.mybatis.MyBatisItemDao" p:sqlSession-ref="sqlSessionTemplate"/>
+	<bean id="paymentInfoDao" class="com.lsj.spring.store.dao.mybatis.MyBatisPaymentInfoDao" p:sqlSession-ref="sqlSessionTemplate"/>
+	<bean id="purchaseOrderDao" class="com.lsj.spring.store.dao.mybatis.MyBatisPurchaseOrderDao" p:sqlSession-ref="sqlSessionTemplate"/>
+	
+	<bean id="placeOrderService" class="com.lsj.spring.store.model.MyBatisOrderServiceImpl" p:itemDao-ref="itemDao" p:paymentInfoDao-ref="paymentInfoDao" p:purchaseOrderDao-ref="purchaseOrderDao"/>
+</beans>

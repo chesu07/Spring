@@ -1,0 +1,5 @@
+15강. Spring AOP
+
+@Aspect 이노테이션을 이용한 AOP예제(ch15 예제와 결과가 동일하다.)
+:@Aspect 이노테이션을 사용하면 XML 파일에 Advice 및 Pointcut 등의 설정을 하지 않고도
+자동으로 Advice를 적용할 수 있다.

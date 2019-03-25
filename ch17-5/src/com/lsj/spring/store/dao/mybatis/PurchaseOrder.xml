@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lsj.spring.store.dao.mybatis.PurchaseOrder">	
+	<select id="nextVal" resultType="Integer">
+		select purchase_seq.nextval from dual
+	</select>
+	
+	<insert id="insert" parameterType="com.lsj.spring.store.model.PurchaseOrder">
+		insert into PURCHASE_ORDER(PURCHASE_ORDER_ID, ITEM_ID, PAYMENT_INFO_ID, ADDRESS) 
+		values (#{id}, #{itemId}, #{paymentInfoId}, #{address})
+	</insert>	
+</mapper>  

@@ -1,0 +1,37 @@
+package com.lsj.spring.store.model;
+
+import org.springframework.transaction.annotation.Transactional;
+
+import com.lsj.spring.store.dao.ItemDao;
+import com.lsj.spring.store.dao.PaymentInfoDao;
+import com.lsj.spring.store.dao.PurchaseOrderDao;
+
+public class PlaceOrderServiceAnnotImpl implements PlaceOrderService {
+	private ItemDao itemDao;
+	private PaymentInfoDao paymentInfoDao;
+	private PurchaseOrderDao purchaseOrderDao;
+	
+	public void setItemDao(ItemDao itemDao){
+		this.itemDao = itemDao;
+	}
+	public void setPaymentInfoDao(PaymentInfoDao paymentInformationDao) {
+		this.paymentInfoDao = paymentInformationDao;				
+	}
+	public void setPurchaseOrderDao(PurchaseOrderDao purchaseOrderDao){
+		this.purchaseOrderDao = purchaseOrderDao;
+	}
+	
+	@Override
+	@Transactional
+	public PurchaseOrderResult order(PurchaseOrderRequest orderRequest) throws ItemNotFoundException{
+		Item item = itemDao.findById(orderRequest.getItemId());
+		if(item == null) throw new ItemNotFoundException(orderRequest.getItemId());
+		
+		PaymentInfo paymentInfo = new PaymentInfo(item.getPrice());
+		paymentInfoDao.insert(paymentInfo);
+		PurchaseOrder order = new PurchaseOrder(item.getId(),orderRequest.getAddress(),paymentInfo.getId());
+		purchaseOrderDao.insert(order);
+		return new PurchaseOrderResult(item, paymentInfo, order);				
+	}
+	
+}

@@ -1,0 +1,4 @@
+16강. Spring 데이터베이스
+
+SimpleJdbcTemplate클래스를 이용한 JDBC 테스트
+SimpleJdbcTemplate 클래스는 spring-jdbc.jar 4버전부터 삭제 되어서 더이상 사용하지 않는다.

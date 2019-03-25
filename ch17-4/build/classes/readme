@@ -1,0 +1,5 @@
+17강. 트랜잭션 관리 및 ORM(마이바티스) 연동
+
+- ORM 연동에 의한 트랜잭션 테스트 : iBatis 2.X 활용
+- spring-orm-3.2.6.RELEASE 버전 이후 SqlMapClientDaoSupport 클래스 삭제? 
+ 따라서 실습을 위해 해당 라이브러리 적용하였음.

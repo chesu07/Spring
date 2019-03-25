@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="boardDao" class="com.lsj.spring.MyBoardDAO">
+		<!-- 멤버변수의 세터(setDataSource)에 값 전달하기 (멤버변수가 객체인 경우) -->		
+		<property name="dataSource" ref="dataSource"/>
+		<!-- 멤버변수의 세터(setDataSource)에 값 전달하기 (멤버변수가 객체인 경우) -->		  
+	</bean>
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<!-- 멤버변수의 세터(setDriverClass...등)에 값 전달하기(멤버변수가 인터페이스를 구현한 클래스인 경우) -->
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:DHDB"/>
+		<property name="username" value="scott"/>
+		<property name="password" value="snrnrh21"/>
+		<!-- 멤버변수의 세터(setDriverClass...등)에 값 전달하기(멤버변수가 인터페이스를 구현한 클래스인 경우) -->
+	</bean>
+				
+	<bean name="writeBoardService" class="com.lsj.spring.WriteBoardServiceImpl">
+		<!-- 생성자에 인자를 전달하는 경우(인자가 객체인 경우) -->
+		<!-- 아래 코드를 다음과 같이 수정해도 된다.  <constructor-arg ref="boardDao"/> -->
+		<constructor-arg>
+			<ref bean="boardDao"/>
+		</constructor-arg>
+		<!-- 생성자에 인자를 전달하는 경우(인자가 객체인 경우) -->
+	</bean>	
+</beans>
+

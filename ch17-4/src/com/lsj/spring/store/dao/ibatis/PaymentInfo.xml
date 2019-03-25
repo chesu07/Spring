@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PaymentInfo">
+	<typeAlias alias="PaymentInfo" type="com.lsj.spring.store.model.PaymentInfo"/>
+	<select id="nextVal" resultClass="Integer">
+		select payment_seq.nextval from dual
+	</select>
+	<insert id="insert" parameterClass="PaymentInfo">
+		insert into PAYMENT_INFO(PAYMENT_INFO_ID, PRICE) values(#id#, #price#)
+	</insert>	
+</sqlMap>

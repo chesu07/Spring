@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	
+	<bean id="loggingAdvice" class="com.lsj.spring.aop.LoggingAdvice" />
+	<bean id="cacheAdvice" class="com.lsj.spring.aop.ArticleCacheAdvice" />
+	<bean id="traceAdvice" class="com.lsj.spring.aop.UpdateMemberInfoTraceAdvice" />
+	
+	<aop:config>
+		<aop:aspect id="loggingAspect" ref="loggingAdvice" order="1">
+			<aop:pointcut id="publicMethod" expression="execution(public * com.lsj.spring..*(..))"/>		
+			<aop:before method="before" pointcut-ref="publicMethod"/>			
+			<aop:after-returning method="afterReturning" pointcut-ref="publicMethod" returning="ret"/>
+			<aop:after-throwing method="afterThrowing" pointcut-ref="publicMethod" throwing="ex"/>
+			<aop:after method="afterFinally" pointcut-ref="publicMethod"/>			
+		</aop:aspect>
+		
+		<aop:aspect id="cacheAspect" ref="cacheAdvice" order="2">
+			<!-- 종합선물세트와 같은 개념임. 대상 메서드의 실행 전과 후에 코드를 추가할 수 있음 -->
+			<aop:around pointcut="execution(public * *..ReadArticleServiceImpl.*(..))" method="cache" />
+		</aop:aspect>
+	
+		<aop:aspect id="traceAspect" ref="traceAdvice" order="3">
+			<aop:after-returning method="traceReturn" pointcut="args(memberId,info)" returning="result" arg-names="joinPoint,result,memberId,info"/>
+		</aop:aspect>
+	</aop:config>
+	 
+	<bean id="readArticleService" class="com.lsj.spring.board.service.ReadArticleServiceImpl"/>
+	<bean id="memberService" class="com.lsj.spring.member.service.MemberServiceImpl"/>
+</beans>
