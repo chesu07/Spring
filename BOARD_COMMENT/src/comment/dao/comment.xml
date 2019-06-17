@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatid-3-config.dtd">
+<mapper namespace="comment.dao.comment">
+	<resultMap id="commentResult" type="comment.model.CommentVO">
+		<result property="comment_id" column="COMMENT_ID" jdbcType="BIGINT" />
+		<result property="num" column="NUM" jdbcType="BIGINT" />
+		
+		<result property="comment_name" column="COMMENT_NAME" jdbcType="VARCHAR" />
+		<result property="comment" column="COMMENT" jdbcType="VARCHAR" />
+		<result property="regdate" column="REGDATE" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<!-- 전체글수 가져오기 -->
+	<select id="getListCount" resultType="Integer">
+		select count(*) from BOARDC_COMMENT
+	</select>
+	
+	<select id="nextVal" resultType="Integer">
+		select BOARDC_COMMENT_SEQ.nextval from dual
+	</select>
+	
+	<!-- 글가져오기 -->
+	<select id="getList" parameterType="java.util.Map" resultMap="commentResult">
+		select *
+		  from (
+		  		select ROWNUM rnum, comment_id, num, comment_name, comments, regdate
+		          from (
+		          			select * from BOARDC_COMMENT
+		         		 	 where num = #{num} 
+		                 	 order by comment_id asc
+		               )
+		       )
+		 where rnum between #{start} and #{end}
+	</select>
+		
+	<!-- insertMessage : 댓글쓰기 -->
+	<insert id="insertMessage" parameterType="comment.model.CommentVO">
+		insert into BOARDC_COMMENT(comment_id, num, comment_name, comments, regdate)
+		values(#{comment_id}, #{num}, #{comment_name}, #{comment}, #{regdate})
+	</insert>
+	
+	<!-- updateMessage : 댓글수정 -->
+	<update id="updateMessage" parameterType="comment.model.CommentVO">
+		update BOARDC_COMMENT set comments = #{comment}
+		 where comment_id = #{comment_id}
+	</update>
+	
+	<!-- deleteMessage : 댓글삭제 -->
+	<delete id="deleteMessage" parameterType="Integer">
+		delete from BOARDC_COMMENT
+		 where comment_id = #{comment_id}
+	</delete>
+</mapper>

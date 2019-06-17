@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- DAO -->
+	<bean id="mybaitsCommentDao" class="comment.dao.MybatisCommentDao" p:sqlSession-ref="sqlSessionTemplate" />
+			
+	<!-- Controller -->	
+	<bean id="CommentListController" class="comment.controller.CommentListController" p:CommentListImpl-ref="CommentListImpl" />
+	<bean id="CommentWriteController" class="comment.controller.CommentWriteController" p:CommentWriteImpl-ref="CommentWriteImpl" />
+	<bean id="CommentUpdateController" class="comment.controller.CommentUpdateController" p:CommentUpdateImpl-ref="CommentUpdateImpl" />
+	<bean id="CommentDeleteController" class="comment.controller.CommentDeleteController" p:CommentDeleteImpl-ref="CommentDeleteImpl" />	
+	
+	<!-- Service -->
+	<bean id="CommentListImpl" class="comment.service.CommentListImpl" p:commentDao-ref="mybatisCommentDao" />
+	<bean id="CommentWriteImpl" class="comment.service.CommentWriteImpl" p:commentDao-ref="mybatisCommentDao" />
+	<bean id="CommentUpdateImpl" class="comment.service.CommentUpdateImpl" p:commentDao-ref="mybatisCommentDao" />
+	<bean id="CommentDeleteImpl" class="comment.service.CommentDeleteImpl" p:commentDao-ref="mybatisCommentDao" />
+	
+</beans>
